@@ -73,13 +73,23 @@ def kunde_aktualisieren():
 
     print(f"Kunde '{name_zu_aktualisieren}' wurde aktualisiert.")
 
+def kunde_loeschen():
+    print("\n--- Kunden löschen ---")
+    name_zu_loeschen = input("Name des zu löschenden Kunden: ")
+    if name_zu_loeschen in kunden:
+        del kunden[name_zu_loeschen]
+        print(f"Kunde '{name_zu_loeschen}' wurde aus dem Katalog entfernt.")
+    else:
+        print(f"Fehler: Kunde '{name_zu_loeschen}' nicht im Katalog gefunden.")
+
 def zeige_menue():
     print("\n--- CRM Menü ---")
     print("1. Kunde hinzufügen")
     print("2. Kunden anzeigen")
     print("3. Kunde suchen")
     print("4. Kunde aktualisieren")
-    print("5. Beenden")
+    print("5. Kunde löschen")
+    print("6. Beenden")
     print("----------------")
 
 def main():
@@ -96,6 +106,8 @@ def main():
         elif wahl == '4':
             kunde_aktualisieren()
         elif wahl == '5':
+            kunde_loeschen()
+        elif wahl == '6':
             print("Programm wird beendet. Auf Wiedersehen!")
             break
         else:
@@ -105,5 +117,5 @@ if __name__ == "__main__":
     main()
 
 # Test der Funktionen (werden später durch ein Menü ersetzt)
-kunde_hinzufuegen()
-kunden_anzeigen()
+# kunde_hinzufuegen()
+# kunden_anzeigen()
