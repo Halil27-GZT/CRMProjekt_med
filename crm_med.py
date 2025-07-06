@@ -31,6 +31,31 @@ def kunde_hinzufuegen():
     }
     print(f"Kunde '{name}' wurde hinzugefügt.")
 
+def zeige_menue():
+    print("\n--- CRM Menü ---")
+    print("1. Kunde hinzufügen")
+    print("2. Kunden anzeigen")
+    print("3. Beenden")
+    print("----------------")
+
+def main():
+    while True:
+        zeige_menue()
+        wahl = input("Ihre Wahl: ")
+
+        if wahl == '1':
+            kunde_hinzufuegen()
+        elif wahl == '2':
+            kunden_anzeigen()
+        elif wahl == '3':
+            print("Programm wird beendet. Auf Wiedersehen!")
+            break
+        else:
+            print("Ungültige Eingabe. Bitte versuchen Sie es erneut.")
+
+if __name__ == "__main__":
+    main()
+
 # Test der Funktionen (werden später durch ein Menü ersetzt)
 # kunde_hinzufuegen()
 # kunden_anzeigen()
