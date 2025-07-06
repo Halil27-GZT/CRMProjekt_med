@@ -1,0 +1,26 @@
+{
+    "Halil": {
+        "email": "ha@gmail.com",
+        "telefon": "0160123456"
+    },
+    "Ibrahim": {
+        "email": "ib@gmail.com",
+        "telefon": "0161123456"
+    },
+    "Mustafa": {
+        "email": "mu@gmail.com",
+        "telefon": "0163123456"
+    },
+    "Markus": {
+        "email": "mar@gmail.com",
+        "telefon": "01641234567"
+    },
+    "Kai": {
+        "email": "ka@gmail.com",
+        "telefon": "0165123456"
+    },
+    "Ali": {
+        "email": "ai@gmail.com",
+        "telefon": "0166123456"
+    }
+}
