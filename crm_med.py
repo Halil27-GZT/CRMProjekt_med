@@ -1,10 +1,10 @@
 # Dein Kundenmanagement-System med
 # Autor: Halil Ibrahim Türkseven
-
-import json # NEU
+import json
+import re # NEU: Für E-Mail-Validierung
 
 kunden = {} # Ein Dictionary zum Speichern der Kunden. Schlüssel: Kundenname, Wert: Dictionary mit Details
-DATEINAME = "kunden.json" # NEU: Dateiname für die Speicherung des Katalogs
+DATEINAME = "kunden.json" # Dateiname für die Speicherung des Katalogs
 
 def kunden_anzeigen():
     if not kunden:
@@ -21,8 +21,22 @@ def kunden_anzeigen():
 def kunde_hinzufuegen():
     print("\n--- Kunden hinzufügen ---")
     name = input("Name des Kunden: ")
-    email = input("E-Mail des Kunden: ")
-    telefon = input("Telefonnummer des Kunden: ")
+
+    # Validierung für E-Mail
+    while True:
+        email = input("E-Mail des Kunden: ")
+        if re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            break
+        else:
+            print("Ungültiges E-Mail-Format. Bitte versuchen Sie es erneut.")
+
+    # Validierung für Telefonnummer
+    while True:
+        telefon = input("Telefonnummer des Kunden: ")
+        if telefon.replace('+', '').isdigit() and (telefon.startswith('+') or not telefon.startswith('+')):
+            break
+        else:
+            print("Ungültige Telefonnummer. Bitte geben Sie nur Ziffern ein (optional mit + am Anfang).")
 
     if name in kunden:
         print(f"Fehler: Kunde '{name}' existiert bereits im Katalog.")
@@ -48,7 +62,7 @@ def kunde_suchen():
         return
 
     print(f"\n--- Gefundene Kunden für '{suchbegriff}' ---")
-    for name, details in gefundene_kunden.items():
+    for name, details in kunden.items():
         print(f"Name: {name}")
         print(f"  E-Mail: {details.get('email', 'N/A')}")
         print(f"  Telefon: {details.get('telefon', 'N/A')}")
@@ -67,11 +81,17 @@ def kunde_aktualisieren():
     print(f"  Telefon: {kunden[name_zu_aktualisieren]['telefon']}")
 
     neue_email = input("Neue E-Mail (leer lassen für keine Änderung): ")
-    neue_telefon = input("Neue Telefonnummer (leer lassen für keine Änderung): ")
-
     if neue_email:
+        while not re.match(r"[^@]+@[^@]+\.[^@]+", neue_email):
+            print("Ungültiges E-Mail-Format. Bitte versuchen Sie es erneut.")
+            neue_email = input("Neue E-Mail (leer lassen für keine Änderung): ")
         kunden[name_zu_aktualisieren]['email'] = neue_email
+
+    neue_telefon = input("Neue Telefonnummer (leer lassen für keine Änderung): ")
     if neue_telefon:
+        while not (neue_telefon.replace('+', '').isdigit() and (neue_telefon.startswith('+') or not neue_telefon.startswith('+'))):
+            print("Ungültige Telefonnummer. Bitte geben Sie nur Ziffern ein (optional mit + am Anfang).")
+            neue_telefon = input("Neue Telefonnummer (leer lassen für keine Änderung): ")
         kunden[name_zu_aktualisieren]['telefon'] = neue_telefon
 
     print(f"Kunde '{name_zu_aktualisieren}' wurde aktualisiert.")
